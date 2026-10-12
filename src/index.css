@@ -1,0 +1,1482 @@
+@import "tailwindcss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #141414;
+    color: #E5E5E5;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.header h1 {
+    color: #2196F3;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    color: #A3A3A3;
+    font-size: 1rem;
+}
+
+/* Top Action Buttons (Notepad & Theme) */
+.notepad-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2D2D2D;
+    color: #D4D4D4;
+    border: 1px solid #555555;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.notepad-toggle:hover {
+    background: #262626;
+    border-color: #A3A3A3;
+    color: #FFFFFF;
+}
+
+.theme-toggle {
+    background: #2D2D2D;
+    color: #D4D4D4;
+    border: 1px solid #555555;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: #262626;
+    border-color: #A3A3A3;
+    color: #FFFFFF;
+}
+
+.header-right-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrange-toggle {
+    background: #2D2D2D;
+    color: #D4D4D4;
+    border: 1px solid #555555;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.arrange-toggle:hover {
+    background: #262626;
+    border-color: #A3A3A3;
+    color: #FFFFFF;
+}
+
+.arrange-toggle.active {
+    background: #FAFAFA;
+    border-color: #FAFAFA;
+    color: #000000;
+}
+
+/* Notepad Overlay */
+.notepad-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: none;
+}
+
+.notepad-overlay.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#notepad-modal-dialog {
+    background: #1E1E1E;
+    border: 1px solid #262626;
+    border-radius: 10px;
+    padding: 10px 16px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+}
+
+#notepad-modal-dialog .notepad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #262626;
+    padding-bottom: 10px;
+}
+
+#notepad-modal-dialog .notepad-header h3 {
+    color: #E5E5E5;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#notepad-modal-dialog .notepad-close {
+    background: #2D2D2D;
+    color: #A3A3A3;
+    border: 1px solid #555555;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#notepad-modal-dialog .notepad-close:hover {
+    background: #F44336;
+    border-color: #F44336;
+    color: white;
+}
+
+#notepad-modal-dialog .notepad-textarea {
+    width: 100%;
+    flex: 1;
+    background: #2D2D2D;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    color: #E5E5E5;
+    font-size: 0.95rem;
+    padding: 15px;
+    resize: none;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    min-height: 350px;
+}
+
+#notepad-modal-dialog .notepad-textarea:focus {
+    outline: none;
+    border-color: #A3A3A3;
+}
+
+.notepad-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notepad-info {
+    color: #737373;
+    font-size: 0.85rem;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: #1E1E1E;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 20px;
+    gap: 6px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #A3A3A3;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.tab-btn:hover {
+    background: #2D2D2D;
+    color: #E5E5E5;
+}
+
+.tab-btn.active {
+    background: #2196F3;
+    color: #FFFFFF;
+    border-color: #2196F3;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+}
+
+/* Tab Content */
+.tab-content {
+    background: #1E1E1E;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-section {
+    background: #262626;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+}
+
+.form-section h3 {
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #D4D4D4;
+    font-size: 0.95rem;
+}
+
+/* Input Styles */
+input[type="text"], 
+input[type="email"], 
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+    color: #FFFFFF;
+    width: 100%;
+    padding: 10px 12px;
+    background: #2D2D2D;
+    border: 1px solid #555555;
+    border-radius: 6px;
+    color: #E5E5E5;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: #1E1E1E;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #A3A3A3;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 65px;
+}
+
+/* Radio and Checkbox Groups */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.radio-item, .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    min-height: 32px;
+}
+
+.radio-item:hover, .checkbox-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.radio-item label, .checkbox-item label, .checkbox-item span {
+    margin: 0;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: normal;
+    color: #E0E0E0;
+}
+
+/* Card-style Radio/Checkboxes (Replaces inline Tailwind colors) */
+.card-radio {
+    background: #262626;
+    border: 1px solid #262626;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.card-radio:hover {
+    border-color: #A3A3A3;
+}
+
+/* Sub-inputs inside Radio cards */
+.sub-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #2D2D2D;
+    color: #E5E5E5;
+    border: 1px solid #555555;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+}
+
+.sub-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #2196F3;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary {
+    background: #272d37;
+    border-color: #3e4858;
+    color: #F1F5F9;
+}
+.btn-secondary:hover {
+    background: #323946;
+    border-color: #4f5b6f;
+    color: #FFFFFF;
+}
+
+.btn-primary { background: #2196F3; color: white; border-color: #2196F3; }
+.btn-primary:hover { background: #1976D2; border-color: #1976D2; }
+.btn-success { background: #2E7D32; color: white; border-color: #388E3C; }
+.btn-success:hover { background: #388E3C; }
+.btn-warning { background: #FF9800; color: white; }
+.btn-warning:hover { background: #F57C00; }
+.btn-danger { background: #dc2626; color: white; border-color: #dc2626; }
+.btn-danger:hover { background: #b91c1c; border-color: #b91c1c; }
+
+/* Click / Press text flash to green then fade to white */
+@keyframes textPressGreenFade {
+    0% {
+        color: #00E676 !important;
+        text-shadow: 0 0 10px rgba(0, 230, 118, 0.95), 0 0 20px rgba(0, 230, 118, 0.5) !important;
+    }
+    30% {
+        color: #00E676 !important;
+        text-shadow: 0 0 6px rgba(0, 230, 118, 0.7) !important;
+    }
+    100% {
+        color: #ffffff !important;
+        text-shadow: none !important;
+    }
+}
+
+.flash-green-fade {
+    animation: textPressGreenFade 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.flash-text-active:active {
+    color: #00E676 !important;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.9) !important;
+    transition: none !important;
+}
+
+/* Button Group */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* Calendar Widget */
+.calendar-widget {
+    background: #262626;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px dashed #c084fc;
+    border-left: 4px solid #c084fc;
+}
+
+.calendar-widget h4 {
+    color: #c084fc;
+    font-weight: 600;
+}
+
+/* Status Messages */
+.status-message {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+.status-success { background: #064e3b; border-left: 4px solid #4CAF50; }
+.status-warning { background: #78350f; border-left: 4px solid #FF9800; color: #ffedd5; }
+.status-error { background: #7f1d1d; border-left: 4px solid #ef4444; color: #fee2e2; }
+.status-info { background: #1e3a8a; border-left: 4px solid #3b82f6; color: #ffffff; }
+
+/* Grid Layout */
+.grid { display: grid; gap: 15px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .tab-nav { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 10px; }
+    .tab-nav { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .btn-group { flex-direction: column; }
+    .radio-group, .checkbox-group { flex-direction: column; gap: 8px; }
+    .tab-content { padding: 15px; }
+    .form-section { padding: 12px; }
+    #notepad-modal-dialog { width: 95%; max-height: 90vh; padding: 15px; }
+    #notepad-modal-dialog .notepad-textarea { min-height: 300px; }
+    .notepad-actions { flex-direction: column; align-items: stretch; }
+    .notepad-info { text-align: center; margin-bottom: 10px; }
+}
+
+/* Utility Classes */
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.text-small { font-size: 0.85rem; color: #94A3B8; }
+.text-bold { font-weight: 600; }
+.mb-10 { margin-bottom: 8px; }
+.mb-20 { margin-bottom: 15px; }
+.mt-10 { margin-top: 8px; }
+.mt-20 { margin-top: 15px; }
+
+/* Utility Colors */
+.text-orange { color: #f59e0b !important; }
+.text-red { color: #ef4444 !important; }
+.text-blue { color: #3b82f6 !important; }
+.text-green { color: #10b981 !important; }
+.text-muted { color: #94a3b8 !important; }
+
+.day75-section {
+    background: #262626;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px dashed #ef4444;
+    border-left: 4px solid #ef4444;
+}
+.day75-section h3 {
+    color: #ef4444;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.email-section { background: #143622; border: 1px solid rgba(16, 185, 129, 0.3); border-left: 4px solid #10b981; border-radius: 8px; padding: 10px 16px; margin-bottom: 20px; }
+.email-section h3 { color: #10b981; margin-top: 0; margin-bottom: 12px; }
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #28303d;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-align: left;
+    font-weight: 500;
+}
+
+/* =========================================================
+   HACKER THEME 2.0 (COLORFUL COMMAND PROMPT STYLE)
+   ========================================================= */
+body.theme-hacker {
+    background-color: #050505;
+    color: #4ade80;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body.theme-hacker * {
+    border-radius: 0 !important;
+}
+
+/* Hide all Emojis in Hacker Mode */
+body.theme-hacker .emoji {
+    display: none;
+}
+
+/* Top Action Buttons Re-shaped for Text */
+body.theme-hacker .notepad-toggle,
+body.theme-hacker .arrange-toggle,
+body.theme-hacker .theme-toggle {
+    width: auto;
+    padding: 0 15px;
+    background-color: #050505;
+    border: 1px solid #4ade80;
+    color: #4ade80;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.4rem;
+    text-shadow: 0 0 2px rgba(74, 222, 128, 0.4);
+    border-radius: 4px !important;
+}
+
+body.theme-hacker .notepad-toggle:hover,
+body.theme-hacker .arrange-toggle:hover,
+body.theme-hacker .theme-toggle:hover {
+    background-color: #4ade80;
+    color: #050505;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+    text-shadow: none;
+}
+
+/* Replace toggle buttons with specific text in hacker mode */
+body.theme-hacker .notepad-toggle::after { content: "NOTES"; font-weight: normal; letter-spacing: 1px; }
+body.theme-hacker .eula-toggle-btn::after { content: "EULA" !important; font-weight: normal; letter-spacing: 1px; }
+body.theme-hacker .arrange-toggle::after { content: "TABS"; font-weight: normal; letter-spacing: 1px; }
+body.theme-hacker .arrange-toggle.active::after { content: "DONE" !important; font-weight: bold; letter-spacing: 1px; }
+body.theme-hacker .theme-toggle::after { content: ">_"; font-weight: normal; letter-spacing: 2px; }
+
+/* Typography mix: Pixel font for headers/buttons, Courier for text */
+body.theme-hacker h1, 
+body.theme-hacker h3, 
+body.theme-hacker .tab-btn,
+body.theme-hacker .btn {
+    font-family: 'VT323', monospace !important;
+    letter-spacing: 1.5px;
+}
+
+body.theme-hacker input,
+body.theme-hacker textarea,
+body.theme-hacker select,
+body.theme-hacker #notepad-modal-dialog .notepad-textarea {
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Colorful UI Elements */
+body.theme-hacker .header h1 {
+    color: #38bdf8 !important;
+    text-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+    font-size: 2.5rem;
+}
+
+body.theme-hacker h3 {
+    color: #4ade80 !important;
+    font-size: 1.5rem;
+}
+
+body.theme-hacker label,
+body.theme-hacker p,
+body.theme-hacker .text-small,
+body.theme-hacker .notepad-info {
+    color: #86efac !important;
+}
+
+body.theme-hacker .text-orange, body.theme-hacker .text-orange p { color: #fbbf24 !important; }
+body.theme-hacker .text-red, body.theme-hacker .text-red p { color: #f87171 !important; text-shadow: 0 0 2px rgba(248,113,113,0.3); }
+body.theme-hacker .text-blue, body.theme-hacker .text-blue p { color: #38bdf8 !important; text-shadow: 0 0 2px rgba(56,189,248,0.3); }
+body.theme-hacker .text-green, body.theme-hacker .text-green p { color: #4ade80 !important; text-shadow: 0 0 2px rgba(74,222,128,0.3); }
+body.theme-hacker .text-muted, body.theme-hacker .text-muted p { color: #22c55e !important; }
+
+body.theme-hacker .header p {
+    color: #22c55e !important;
+}
+
+body.theme-hacker .tab-nav,
+body.theme-hacker .tab-content,
+body.theme-hacker #notepad-modal-dialog {
+    background-color: #0a0a0a;
+    border: 1px solid #166534;
+    box-shadow: 0 0 8px rgba(22, 101, 52, 0.3);
+}
+
+body.theme-hacker .tab-btn {
+    color: #4ade80;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+body.theme-hacker .tab-btn.active {
+    background-color: #4ade80;
+    color: #050505 !important;
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    text-shadow: none;
+}
+
+body.theme-hacker .tab-btn:hover:not(.active) {
+    background-color: #064e3b;
+    color: #4ade80;
+    border: 1px dashed #4ade80;
+}
+
+body.theme-hacker .form-section,
+body.theme-hacker .email-section,
+body.theme-hacker .day75-section {
+    background-color: #0f1110 !important;
+    border: 1px dashed #166534 !important;
+    border-left: 4px solid #4ade80 !important;
+}
+
+body.theme-hacker .calendar-widget {
+    background-color: #0f1110 !important;
+    border: 1px dashed #c084fc !important;
+    border-left: 4px solid #c084fc !important;
+}
+
+body.theme-hacker .calendar-widget h4 {
+    color: #c084fc !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.3rem;
+}
+
+/* Colorful Accents for Specific Sections in Hacker Mode */
+body.theme-hacker .email-section { border-left-color: #fbbf24 !important; }
+body.theme-hacker .email-section h3 { color: #fbbf24 !important; text-shadow: 0 0 3px rgba(251,191,36,0.3); }
+
+body.theme-hacker .day75-section { border: 1px dashed #f87171 !important; border-left: 4px solid #f87171 !important; }
+body.theme-hacker .day75-section h3 { color: #f87171 !important; text-shadow: 0 0 3px rgba(248,113,113,0.3); }
+
+body.theme-hacker input[type="text"],
+body.theme-hacker input[type="email"],
+body.theme-hacker input[type="date"],
+body.theme-hacker input[type="number"],
+body.theme-hacker textarea,
+body.theme-hacker select,
+body.theme-hacker #notepad-modal-dialog .notepad-textarea {
+    background-color: #050505;
+    border: 1px solid #166534;
+    color: #4ade80;
+    font-size: 1rem;
+}
+
+body.theme-hacker input:focus,
+body.theme-hacker textarea:focus,
+body.theme-hacker select:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    outline: none;
+    color: #FFFFFF;
+}
+
+body.theme-hacker input[type="radio"], 
+body.theme-hacker input[type="checkbox"] {
+    appearance: none;
+    background: #050505;
+    border: 1px solid #166534;
+    position: relative;
+}
+
+body.theme-hacker input[type="radio"]:checked::after, 
+body.theme-hacker input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    background: #4ade80;
+    box-shadow: 0 0 3px rgba(74, 222, 128, 0.4);
+}
+
+body.theme-hacker .radio-item:hover, 
+body.theme-hacker .checkbox-item:hover {
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+/* Colorful Buttons in Hacker Mode */
+body.theme-hacker .btn {
+    background-color: #050505;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+}
+
+body.theme-hacker .btn-primary { border: 1px solid #4ade80; color: #4ade80; }
+body.theme-hacker .btn-primary:hover { background-color: #4ade80; color: #050505 !important; box-shadow: 0 0 8px rgba(74, 222, 128, 0.3); text-shadow: none; }
+
+body.theme-hacker .btn-success { border: 1px solid #4ade80; color: #4ade80; }
+body.theme-hacker .btn-success:hover { background-color: #4ade80; color: #050505 !important; box-shadow: 0 0 8px rgba(74, 222, 128, 0.3); text-shadow: none; }
+
+body.theme-hacker .btn-danger { border: 1px solid #f87171; color: #f87171; }
+body.theme-hacker .btn-danger:hover { background-color: #f87171; color: #050505 !important; box-shadow: 0 0 8px rgba(248, 113, 113, 0.3); text-shadow: none; }
+
+body.theme-hacker .btn-warning { border: 1px solid #fbbf24; color: #fbbf24; }
+body.theme-hacker .btn-warning:hover { background-color: #fbbf24; color: #050505 !important; box-shadow: 0 0 8px rgba(251, 191, 36, 0.3); text-shadow: none; }
+
+body.theme-hacker #notepad-modal-dialog .notepad-close {
+    background: transparent;
+    color: #f87171;
+    border: 1px solid #f87171;
+    font-family: Arial, sans-serif !important; 
+}
+body.theme-hacker #notepad-modal-dialog .notepad-close:hover {
+    background: #f87171;
+    color: #050505;
+    box-shadow: 0 0 8px rgba(248, 113, 113, 0.4);
+}
+
+body.theme-hacker #rr_always_cc_toggle {
+    border: 1px solid #00FF00 !important;
+    background-color: #000 !important;
+}
+
+body.theme-hacker #rr_always_cc_toggle[aria-checked="true"] {
+    background-color: #003300 !important;
+    box-shadow: 0 0 5px #00FF00;
+}
+
+body.theme-hacker #rr_always_cc_toggle span {
+    background-color: #00FF00 !important;
+}
+
+/* Removal Request Subject Department code styles */
+.rr-dept-code {
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+/* Default Theme: Blue when Default CC is toggled ON, Green when untoggled (OFF) */
+.rr-dept-code.toggled {
+    color: #2196F3;
+}
+
+.rr-dept-code.untoggled {
+    color: #4CAF50;
+}
+
+/* Hacker Theme: Cyan with glow */
+body.theme-hacker .rr-dept-code.toggled {
+    color: #00FFFF !important;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+body.theme-hacker .rr-dept-code.untoggled {
+    color: #00FF00 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+}
+
+.rr-dept-bar {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.rr-dept-bar-label {
+    color: #B0BEC5;
+}
+
+.rr-dept-btn {
+    background: #1E1E1E;
+    color: #E0E0E0;
+    border: 1px solid #555555;
+    min-width: 52px;
+    text-align: center;
+}
+
+.rr-dept-btn:hover {
+    background: #444444;
+    border-color: #777777;
+}
+
+.rr-dept-btn.active {
+    background: #2196F3;
+    color: #ffffff;
+    border-color: #2196F3;
+    box-shadow: 0 2px 6px rgba(33, 150, 243, 0.35);
+}
+
+.rr-dept-input {
+    background: #222222;
+    color: #ffffff;
+    border: 1px solid #555555;
+}
+
+.rr-dept-input:focus {
+    border-color: #2196F3;
+    outline: none;
+}
+
+/* Hacker Theme overrides for Department Bar & Buttons */
+body.theme-hacker .rr-dept-bar {
+    background: #050505 !important;
+    border: 1px dashed #008800 !important;
+    padding: 14px 18px !important;
+}
+
+body.theme-hacker .rr-dept-bar-label {
+    color: #00FF00 !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 1px;
+}
+
+body.theme-hacker .rr-dept-btn {
+    background: #000000 !important;
+    border: 1.5px solid #00AA00 !important;
+    color: #00FF00 !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.4rem !important;
+    padding: 6px 14px !important;
+    min-width: 58px !important;
+    letter-spacing: 1.5px;
+}
+
+body.theme-hacker .rr-dept-btn:hover {
+    border-color: #00FFFF !important;
+    color: #00FFFF !important;
+    background-color: #001a1a !important;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
+}
+
+body.theme-hacker .rr-dept-btn.active {
+    background: #00FF00 !important;
+    color: #000000 !important;
+    border-color: #00FF00 !important;
+    box-shadow: 0 0 10px #00FF00, inset 0 0 5px rgba(255, 255, 255, 0.5) !important;
+    font-weight: 900 !important;
+}
+
+body.theme-hacker .rr-dept-input {
+    background: #000000 !important;
+    border: 1.5px solid #00AA00 !important;
+    color: #00FFFF !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.4rem !important;
+    padding: 4px 10px !important;
+    letter-spacing: 2px;
+}
+
+body.theme-hacker .rr-dept-input:focus {
+    border-color: #00FFFF !important;
+    box-shadow: 0 0 8px #00FFFF !important;
+}
+
+body.theme-hacker .text-gray-300 {
+    color: #00CC00 !important;
+}
+
+body.theme-hacker .text-gray-400 {
+    color: #00AA00 !important;
+}
+
+
+body.theme-hacker .status-message { font-family: 'VT323', monospace !important; font-size: 1.3rem; letter-spacing: 1px; color: #000000 !important; text-shadow: none !important; }
+body.theme-hacker .status-error { background-color: #FF0033 !important; border: 1px dashed #FF0033 !important; }
+body.theme-hacker .status-error strong { color: #000000 !important; }
+body.theme-hacker .status-warning { background-color: #FFCC00 !important; border: 1px dashed #FFCC00 !important; }
+body.theme-hacker .status-warning strong { color: #000000 !important; }
+body.theme-hacker .status-info { background-color: #00FFFF !important; border: 1px dashed #00FFFF !important; }
+body.theme-hacker .status-info strong { color: #000000 !important; }
+body.theme-hacker .status-success { background-color: #00FF00 !important; border: 1px dashed #00FF00 !important; }
+body.theme-hacker .status-success strong { color: #000000 !important; }
+
+body.theme-hacker .footer {
+    border-top: 1px dashed #008800;
+    color: #008800;
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Arrange Mode Banner */
+.arrange-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(33, 150, 243, 0.12);
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 9px 15px;
+    margin-bottom: 12px;
+    color: #E3F2FD;
+    font-size: 0.88rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tab Phone-App Jiggle & Drag Styles */
+@keyframes phone-jiggle {
+    0% { transform: rotate(-0.9deg) translateY(0); }
+    50% { transform: rotate(1.1deg) translateY(-1px); }
+    100% { transform: rotate(-0.9deg) translateY(0); }
+}
+
+@keyframes phone-jiggle-alt {
+    0% { transform: rotate(1.1deg) translateY(-1px); }
+    50% { transform: rotate(-0.9deg) translateY(0); }
+    100% { transform: rotate(1.1deg) translateY(-1px); }
+}
+
+.tab-nav.is-arranging {
+    border: 2px dashed #4CAF50;
+    background: #232323;
+    box-shadow: 0 0 16px rgba(76, 175, 80, 0.2);
+    padding: 12px;
+}
+
+.tab-nav.is-arranging .tab-btn {
+    cursor: grab;
+    user-select: none;
+    position: relative;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    animation: phone-jiggle 0.26s infinite ease-in-out;
+    touch-action: none;
+}
+
+.tab-nav.is-arranging .tab-btn:nth-child(even) {
+    animation: phone-jiggle-alt 0.24s infinite ease-in-out;
+    animation-delay: -0.12s;
+}
+
+.tab-nav.is-arranging .tab-btn:hover {
+    background: #3c3c3c;
+    border-color: #4CAF50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tab-nav.is-arranging .tab-btn.is-dragging {
+    opacity: 0.45;
+    cursor: grabbing;
+    transform: scale(1.05) rotate(2deg);
+    animation: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 2px solid #2196F3;
+    z-index: 20;
+}
+
+.tab-nav.is-arranging .tab-btn.drop-target {
+    border: 2px dashed #4CAF50 !important;
+    background: rgba(76, 175, 80, 0.25) !important;
+    transform: scale(1.02);
+}
+
+.tab-drag-grip {
+    display: inline-block;
+    font-size: 0.95rem;
+    color: #4CAF50;
+    margin-right: 3px;
+    opacity: 0.85;
+}
+
+/* Hacker Mode Styles for Arrange Mode */
+body.theme-hacker .arrange-banner {
+    background: #001500 !important;
+    border: 1.5px solid #00FF00 !important;
+    color: #00FF00 !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.3rem !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3) !important;
+}
+
+body.theme-hacker .arrange-toggle.active {
+    background-color: #00FF00 !important;
+    color: #000000 !important;
+    border-color: #00FF00 !important;
+    box-shadow: 0 0 15px #00FF00 !important;
+}
+
+body.theme-hacker .tab-nav.is-arranging {
+    border: 2px dashed #00FF00 !important;
+    background: #050505 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.35) !important;
+}
+
+body.theme-hacker .tab-nav.is-arranging .tab-btn {
+    border: 1px dashed #00AA00 !important;
+    color: #00FF00 !important;
+    background: #0a0a0a !important;
+}
+
+body.theme-hacker .tab-nav.is-arranging .tab-btn:hover {
+    border-color: #00FFFF !important;
+    box-shadow: 0 0 10px #00FFFF !important;
+}
+
+body.theme-hacker .tab-nav.is-arranging .tab-btn.is-dragging {
+    border: 2px solid #00FFFF !important;
+    box-shadow: 0 0 20px #00FFFF !important;
+}
+
+body.theme-hacker .tab-nav.is-arranging .tab-btn.drop-target {
+    border: 2px dashed #00FFFF !important;
+    background: rgba(0, 255, 255, 0.25) !important;
+}
+
+body.theme-hacker .tab-drag-grip {
+    color: #00FFFF !important;
+}
+
+
+/* Custom Toggle Buttons (Yes/No, Modes) */
+.toggle-btn-active {
+    background-color: #2196F3;
+    border-color: #1976D2;
+    color: #FFFFFF;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+.toggle-btn-inactive {
+    background-color: #1E232C;
+    border-color: #404040;
+    color: #9CA3AF;
+    transition: all 0.2s ease;
+}
+.toggle-btn-inactive:hover {
+    color: #FFFFFF;
+    background-color: #2D3748;
+}
+
+body.theme-hacker .toggle-btn-active {
+    background-color: transparent;
+    border-color: #4ade80;
+    color: #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.5);
+}
+
+body.theme-hacker .toggle-btn-inactive {
+    background-color: transparent;
+    border-color: #166534;
+    color: #166534;
+}
+body.theme-hacker .toggle-btn-inactive:hover {
+    color: #4ade80;
+    border-color: #4ade80;
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+body.theme-hacker .card-radio {
+    background: #050505;
+    border-color: #166534;
+}
+body.theme-hacker .card-radio:hover {
+    border-color: #4ade80;
+}
+body.theme-hacker .sub-input {
+    background: #2D2D2D;
+    border-color: #166534;
+    color: #4ade80;
+}
+body.theme-hacker .sub-input:focus {
+    border-color: #4ade80;
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+}
+
+/* Theme Overrides for colorful dark */
+.card-radio {
+    background: #262626;
+    border-color: #404040;
+}
+.card-radio:hover {
+    border-color: #3b82f6;
+}
+.sub-input {
+    background: #1E1E1E;
+    border-color: #404040;
+}
+
+.toggle-btn-inactive {
+    background-color: #333333;
+    border-color: #404040;
+}
+.toggle-btn-inactive:hover {
+    background-color: #333333;
+    border-color: #3b82f6;
+}
+
+/* Hacker Theme Alerts Override */
+body.theme-hacker .bg-blue-900\/40,
+body.theme-hacker .bg-amber-900\/40,
+body.theme-hacker .bg-rose-900\/40 {
+    background-color: transparent !important;
+    border: 1px dashed #4ade80 !important;
+    border-left: 4px solid #4ade80 !important;
+}
+
+
+body.theme-hacker .border-blue-500,
+body.theme-hacker .border-amber-500,
+body.theme-hacker .border-rose-500 {
+    border-color: #4ade80 !important;
+}
+
+body.theme-hacker .text-neutral-200,
+body.theme-hacker .text-neutral-300,
+body.theme-hacker .text-neutral-400,
+body.theme-hacker .text-neutral-500 {
+    color: #4ade80 !important;
+}
+
+/* Fix Header Flex Toggles */
+.header > .absolute.left-0 {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.header > .absolute.left-0 .notepad-toggle {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+}
+
+body.theme-hacker .eula-toggle-btn::after { 
+    content: "EULA" !important; 
+    font-weight: normal; 
+    letter-spacing: 1px; 
+}
+
+/* Shared Notepad Green Look */
+#notepad-modal-dialog {
+    background: #111111 !important;
+    border: 1px solid #3d3d3d !important;
+}
+#notepad-modal-dialog .notepad-header {
+    border-bottom: 2px solid #4ade80 !important;
+}
+#notepad-modal-dialog .notepad-header h3 {
+    color: #4ade80 !important;
+    font-weight: bold;
+}
+#notepad-modal-dialog .notepad-close {
+    background: #ef4444 !important;
+    border-radius: 50% !important;
+    width: 28px !important;
+    height: 28px !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2rem !important;
+    border: none !important;
+}
+#notepad-modal-dialog .notepad-close:hover {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+}
+#notepad-modal-dialog .notepad-textarea {
+    border: 2px solid #4ade80 !important;
+    border-radius: 8px !important;
+    background: #141414 !important;
+    color: #cccccc !important;
+}
+#notepad-modal-dialog .notepad-textarea:focus {
+    box-shadow: none !important;
+}
+
+/* Hacker theme specific borders for SD Card Tab */
+body.theme-hacker .border-purple-500 { border: 2px solid #a855f7 !important; }
+body.theme-hacker .border-blue-500 { border: 2px solid #3b82f6 !important; }
+body.theme-hacker .border-emerald-500 { border: 2px solid #10b981 !important; }
+body.theme-hacker .border-red-500 { border: 1px solid #ef4444 !important; }
+body.theme-hacker .border-amber-500 { border: 2px solid #f59e0b !important; }
+body.theme-hacker .bg-purple-900\/10 { background-color: rgba(88, 28, 135, 0.2) !important; }
+body.theme-hacker .bg-blue-900\/10 { background-color: rgba(30, 58, 138, 0.2) !important; }
+body.theme-hacker .bg-emerald-900\/10 { background-color: rgba(6, 78, 59, 0.2) !important; }
+body.theme-hacker .bg-amber-900\/10 { background-color: rgba(120, 53, 15, 0.2) !important; }
+body.theme-hacker .bg-red-900\/10 { background-color: rgba(127, 29, 29, 0.2) !important; }
+body.theme-hacker .text-blue-400,
+body.theme-hacker .text-amber-400 {
+    color: #4ade80 !important;
+}
+body.theme-hacker .text-rose-400,
+body.theme-hacker .text-red-500,
+body.theme-hacker .text-red-400 {
+    color: #ef4444 !important;
+}
+
+/* Strip bottom margin from last elements in sections so they fit neatly */
+.email-section > :last-child,
+.form-section > :last-child,
+.day75-section > :last-child {
+    margin-bottom: 0 !important;
+}
+
+/* =========================================================
+   FOLDING BASIC CALCULATOR (3D Fold / Origami Door Effect)
+   ========================================================= */
+#folding-calc-container {
+    perspective: 1600px;
+    transform-style: preserve-3d;
+    transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.folding-calc-panel {
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.18, 0.92, 0.26, 1.12),
+                opacity 0.32s ease,
+                box-shadow 0.36s ease;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
+#folding-calc-container.is-closed {
+    transform: translateX(-100%);
+}
+
+#folding-calc-container.is-closed .folding-calc-panel {
+    transform: rotateY(-84deg) scale(0.92);
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+#folding-calc-container.is-open {
+    transform: translateX(0);
+}
+
+#folding-calc-container.is-open .folding-calc-panel {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 14px 14px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.folding-calc-tab {
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.55);
+    transform-origin: left center;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.folding-calc-tab:hover {
+    box-shadow: 6px 6px 26px rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.calc-btn {
+    transition: transform 0.08s ease, background-color 0.15s ease, color 0.15s ease, filter 0.12s ease;
+}
+
+/* Tactile visual press when controlled from numpad/keyboard */
+.calc-btn-flash {
+    transform: scale(0.92) !important;
+    filter: brightness(1.5) !important;
+    outline: 2px solid #60a5fa !important;
+}
+
+/* Hacker Theme Overrides for Folding Calculator */
+body.theme-hacker .folding-calc-panel {
+    background-color: #070907 !important;
+    border: 1px dashed #4ade80 !important;
+    border-left: none !important;
+    box-shadow: 0 0 24px rgba(74, 222, 128, 0.25) !important;
+    border-radius: 0 !important;
+}
+
+body.theme-hacker .folding-calc-tab {
+    background-color: #050505 !important;
+    border: 1px dashed #4ade80 !important;
+    border-left: none !important;
+    color: #4ade80 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 12px rgba(74, 222, 128, 0.3) !important;
+}
+
+body.theme-hacker .folding-calc-tab:hover {
+    background-color: #0f1f12 !important;
+    color: #86efac !important;
+    border-color: #4ade80 !important;
+    box-shadow: 0 0 18px rgba(74, 222, 128, 0.55) !important;
+    transform: translateY(-50%) scale(1.05) !important;
+}
+
+body.theme-hacker .folding-calc-tab svg {
+    color: #4ade80 !important;
+}
+
+body.theme-hacker .folding-calc-tab span {
+    font-family: 'VT323', monospace !important;
+    font-size: 1.35rem !important;
+    letter-spacing: 1px !important;
+}
+
+body.theme-hacker .calc-display {
+    background-color: #020402 !important;
+    border: 1px solid #166534 !important;
+    border-radius: 0 !important;
+}
+
+body.theme-hacker .calc-display div,
+body.theme-hacker .calc-display span {
+    font-family: 'VT323', monospace !important;
+    color: #4ade80 !important;
+}
+
+body.theme-hacker .calc-btn {
+    background-color: #080d09 !important;
+    border: 1px solid #166534 !important;
+    color: #4ade80 !important;
+    border-radius: 0 !important;
+    font-family: 'VT323', monospace !important;
+    font-size: 1.4rem !important;
+    box-shadow: none !important;
+}
+
+body.theme-hacker .calc-btn:hover {
+    background-color: #142e19 !important;
+    color: #ffffff !important;
+    border-color: #4ade80 !important;
+}
+
+body.theme-hacker .calc-btn-op {
+    background-color: #0e1e12 !important;
+    border: 1px solid #4ade80 !important;
+    color: #4ade80 !important;
+}
+
+body.theme-hacker .calc-btn-equals {
+    background-color: #4ade80 !important;
+    color: #050505 !important;
+    font-weight: bold !important;
+    border: 1px solid #4ade80 !important;
+}
+
+body.theme-hacker .calc-btn-equals:hover {
+    background-color: #22c55e !important;
+    color: #000000 !important;
+}
+
+body.theme-hacker .calc-btn-flash {
+    outline: 2px solid #4ade80 !important;
+    background-color: #22c55e !important;
+    color: #000000 !important;
+}
+
+/* =========================================================
+   TOAST NOTIFICATIONS STYLES & ANIMATIONS
+   ========================================================= */
+@keyframes toastProgress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-toast-progress {
+    animation: toastProgress 3s linear forwards;
+}
+
+.animate-toast-slide-in {
+    animation: toastSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hacker Theme Toast Customization */
+body.theme-hacker .toast-card {
+    background-color: #050505 !important;
+    border: 1.5px solid #4ade80 !important;
+    box-shadow: 0 0 16px rgba(74, 222, 128, 0.25) !important;
+    border-radius: 0 !important;
+}
+
+body.theme-hacker .toast-card * {
+    font-family: 'Courier New', Courier, monospace !important;
+    border-radius: 0 !important;
+}
+
+body.theme-hacker .toast-card span {
+    font-family: 'VT323', monospace !important;
+    letter-spacing: 1.2px !important;
+}
+
+

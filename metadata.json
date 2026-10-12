@@ -1,0 +1,6 @@
+{
+  "name": "Clinical Care Note Assistant",
+  "description": "Clinical care documentation, compliance tracking, O2 RUW/swap-out, pickup, supplies, and resupply notes for patient sleep therapy coordinators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
