@@ -49,10 +49,15 @@ The application supports custom themes like a dark/hacker mode to reduce eye str
 ## How to Use
 
 ### Online Use
-1. Simply open the app in your browser
-2. Start documenting right away - no login or setup required
-3. Use the tabs at the top to switch between different documentation types
-4. Your work saves automatically to your browser
+1. **Prerequisites**: Node.js (v18+ recommended) and Bun (recommended) or npm
+2. **Installation**:
+   - Clone the repository: `git clone <repository-url>`
+   - Navigate to project directory: `cd clinical-care-note-assistant`
+   - Install dependencies: `bun install` (or `npm install`)
+3. **Run Locally**:
+   - Start the development server: `bun run dev` (or `npm run dev`)
+   - Open your browser to: `http://localhost:3000`
+   - Start documenting right away - your work saves automatically to your browser
 
 ### Offline Use (Recommended for Most Users)
 1. While connected to internet, press **Ctrl + D** or click the download button in the footer
