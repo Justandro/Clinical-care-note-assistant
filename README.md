@@ -12,9 +12,6 @@ The Clinical Care Note Assistant helps medical professionals create and manage v
 
 Here's what the app looks like in use:
 
-![Main Tab Interface](public/assets/main-tab.png)
-*Main tab interface showing different documentation options*
-
 ![Compliance Risk Tab](public/assets/risk-tab.png)
 *Compliance Risk tab for tracking and mitigation documentation*
 
