@@ -2,7 +2,7 @@
 
 A simple, effective tool for clinical documentation designed specifically for nationwide medical clinical care teams.
 
-![Clinical Care Note Assistant Preview](public/assets/screenshot.png)
+![Clinical Care Note Assistant Preview](public/assets/main-tab.png)
 
 ## What This App Does
 
@@ -12,16 +12,14 @@ The Clinical Care Note Assistant helps medical professionals create and manage v
 
 Here's what the app looks like in use:
 
-![Main Interface](public/assets/screenshot.png)
-*Main tab-based interface showing different documentation options*
+![Main Tab Interface](public/assets/main-tab.png)
+*Main tab interface showing different documentation options*
 
-![Documentation Tab](public/assets/screenshot.png)
-*Example of a clinical documentation tab in use*
+![Compliance Risk Tab](public/assets/risk-tab.png)
+*Compliance Risk tab for tracking and mitigation documentation*
 
-![Offline Use](public/assets/screenshot.png)
-*Offline version accessible via Ctrl+D download*
-
-*Note: Replace the placeholder images above with actual screenshots of your app. Save screenshots in the `public/` folder and update the paths accordingly (e.g., `public/screenshot1.png`).*
+![Theme Toggle View](public/assets/theme-view.png)
+*Alternative theme view showing the dark/hacker theme*
 
 ## Key Features
 
