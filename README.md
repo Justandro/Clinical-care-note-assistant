@@ -18,6 +18,12 @@ Here's what the app looks like in use:
 ![O2 Supplies Tab](public/assets/oxygen-tab.png)
 *O2 Supplies tab for managing oxygen equipment*
 
+## Custom Themes
+
+The application supports custom themes like a dark/hacker mode to reduce eye strain and match user preferences.
+
+![Theme Toggle View](public/assets/theme-view.png)
+
 ## Key Features
 
 ### Documentation Tabs
