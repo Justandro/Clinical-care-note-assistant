@@ -18,8 +18,8 @@ Here's what the app looks like in use:
 ![Compliance Risk Tab](public/assets/risk-tab.png)
 *Compliance Risk tab for tracking and mitigation documentation*
 
-![Theme Toggle View](public/assets/theme-view.png)
-*Alternative theme view showing the dark/hacker theme*
+![O2 Supplies Tab](public/assets/oxygen-tab.png)
+*O2 Supplies tab for managing oxygen equipment*
 
 ## Key Features
 
@@ -39,8 +39,8 @@ Here's what the app looks like in use:
 
 ## Who Made This
 
-- **Created by**: Val Hykawy (my brother)
-- **Led and Maintained by**: Andrew Navarro (me)
+- **Created by**: Ibrahim Mostafa (Alias: Val Hykawy)
+- **Led and Maintained by**: Abdallah Mostafa (Alias: Andrew Navarro)
 - **Purpose**: Built specifically for nationwide medical clinical care teams to simplify documentation workflows
 
 ## How to Use
